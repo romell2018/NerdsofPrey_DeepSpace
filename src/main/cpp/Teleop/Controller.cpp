@@ -18,6 +18,7 @@ Controller::Controller()
     Operator = new frc::Joystick(0);
     flipperIntake = new FlipperIntake();
     flipper = new Flipper();
+    //thing
 }
 
 void Controller::RunScript()
