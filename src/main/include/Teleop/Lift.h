@@ -42,9 +42,9 @@ public:
   float sumError;
   float pastError;
   float deltaError;
-  float kp;
-  float ki;
-  float kd;
+  float kp = 0.0025;//0.00055;
+  float ki = 0;
+  float kd = 0;
   //float maxSpeed = 100;
 
   Lift();
