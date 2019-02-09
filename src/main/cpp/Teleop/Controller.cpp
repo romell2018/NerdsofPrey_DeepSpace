@@ -25,7 +25,7 @@ void Controller::RunScript()
 {
     
     drivemode->ArcadeDrive(Operator->GetRawAxis(4), -Operator->GetRawAxis(1));
-   
+    //drivemode->TankDrive(-Operator->GetRawAxis(1), Operator->GetRawAxis(5));
     if (Operator->GetRawButton(5))
     {
         intake->In();
@@ -66,14 +66,11 @@ void Controller::RunScript()
         lift->ControlLift(0);
     }
 
-    if (Operator->GetRawButton(2)) //pressed X
-    {
-        visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));
-    }
-    else
-    {
-        visiontarget->Off();
-    }
+    if (Operator->GetRawButton(2))  runVision = true;
+    if (Operator->GetRawButton(3))  runVision = false;
+
+    if(runVision)   visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));//pressed X
+    else    visiontarget->Off();
     /*
     if(Operator->GetRawButton(0)){
         winch->up();
