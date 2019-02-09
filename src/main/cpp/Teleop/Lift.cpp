@@ -52,7 +52,7 @@ float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
 
 void Lift::ControlLift(int direction)
 {   
-    std::cout << "targetPosition" << targetPosition << std::endl;
+    //std::cout << "targetPosition" << targetPosition << std::endl;
     std::cout << "LiftPosition" << LiftPosition() << std::endl;
 
     if (targetPosition >= 0)

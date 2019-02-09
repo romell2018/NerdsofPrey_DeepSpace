@@ -12,7 +12,7 @@
 #include <memory>
 #include <cmath>
 
-#define MAX_DELTA 50
+#define MAX_DELTA 100
 
 namespace Positions
 {
@@ -21,7 +21,7 @@ namespace Positions
   diskLow = 235,
   diskMid = 2300,
   diskHigh = 4055,
-  ballLow = 2220,
+  ballLow = 2000,
   ballMid = 3560,
   ballHigh = 5900,
   floor = 50;

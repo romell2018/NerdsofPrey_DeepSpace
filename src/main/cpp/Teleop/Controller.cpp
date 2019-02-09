@@ -29,29 +29,29 @@ void Controller::RunScript()
     if (Operator->GetRawButton(5))
     {
         intake->In();
-        flipperIntake->In();
+        //flipperIntake->In();
     }
     else if (Operator->GetRawButton(6))
     {
         intake->Out();
-        flipperIntake->Out();
+        //flipperIntake->Out();
     }
     else
     {
         intake->Off();
-        flipperIntake->Off();
+        //flipperIntake->Off();
     }
     if (Operator->GetPOV() == 0)
     {
-        flipper->up(); //move down
+        //flipper->up(); //move down
     }
     else if (Operator->GetPOV() == 180)
     {
-        flipper->down(); //move up
+        //flipper->down(); //move up
     }
     else
     {
-        flipper->off(); //off
+        //flipper->off(); //off
     }
     if (Operator->GetRawButton(4)) //pressed Y
     {
