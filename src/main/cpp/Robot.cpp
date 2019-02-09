@@ -48,7 +48,7 @@ void Robot::AutonomousPeriodic() {}
 void Robot::TeleopInit()
 {
   led->RunScriptBlue();
-  controller->lift->targetPosition = Lift::Positions::manual;
+  controller->lift->targetPosition = Positions::manual;
 }
 
 void Robot::TeleopPeriodic()

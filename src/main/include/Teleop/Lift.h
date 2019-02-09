@@ -10,6 +10,22 @@
 #include <ctre/Phoenix.h>
 #include <frc/WPILib.h>
 #include <memory>
+#include <cmath>
+
+#define MAX_DELTA 50
+
+namespace Positions
+{
+  constexpr int manual = -2,
+  assistedManual = -1,
+  diskLow = 235,
+  diskMid = 2300,
+  diskHigh = 4055,
+  ballLow = 2220,
+  ballMid = 3560,
+  ballHigh = 5900,
+  floor = 50;
+};
 
 class Lift
 {
@@ -18,22 +34,9 @@ public:
   TalonSRX *liftL;
   //frc::DigitalInput* limitSwitchBottom;
   //frc::DigitalInput* limitSwitchTop;
-    
-  enum Positions
-  {
-    manual = -2,
-    assistedManual = -1,
-    diskLow = 235,
-    diskMid = 2300,
-    diskHigh = 4055,
-    ballLow = 2220,
-    ballMid = 3560,
-    ballHigh = 5900,
-    floor = 50
-  };
 
-  Positions targetPosition = Positions::manual;
-  int manualTargetPosition = 0; //45.51111...  is one degree of rotation for the large gear
+  int targetPosition = Positions::manual;
+  int shapedTargetPosition = 0; //45.51111...  is one degree of rotation for the large gear
 
   float error;
   float sumError;
@@ -53,7 +56,7 @@ public:
   float LiftPosition();
 
   void ControlLift(int direction);
-  void SetTarget(Positions target);
+  void SetTarget(int target);
 
 private:
   void UpdatePower(float power);

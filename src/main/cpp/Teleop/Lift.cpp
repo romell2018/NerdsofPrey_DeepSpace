@@ -50,21 +50,26 @@ void Lift::LiftOff()
 float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
 
 void Lift::ControlLift(int direction)
-{
+{   
     if (targetPosition >= 0)
     {
-        UpdatePID(targetPosition);
-        manualTargetPosition = targetPosition;
+        int deltaTargetPosition = targetPosition - LiftPosition();
+        if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
+        else if(deltaTargetPosition < -MAX_DELTA) deltaTargetPosition = -MAX_DELTA;
+
+        shapedTargetPosition = LiftPosition() + deltaTargetPosition;
+
+        UpdatePID(shapedTargetPosition);
     }
     else
     {
         if (targetPosition == -1)//assisted manual
         {
             if(direction == 1)
-                manualTargetPosition += 50;
+                shapedTargetPosition += 50;
             if(direction == -1)
-                manualTargetPosition -= 50;
-            UpdatePID(manualTargetPosition);
+                shapedTargetPosition -= 50;
+            UpdatePID(shapedTargetPosition);
         }
         if(targetPosition == -2)//manual
         {
@@ -74,7 +79,7 @@ void Lift::ControlLift(int direction)
                 LiftOff();
             if(direction == -1)
                 LiftDown();
-            manualTargetPosition = LiftPosition();
+            shapedTargetPosition = LiftPosition();
         }
     }
 }
@@ -95,7 +100,7 @@ void Lift::UpdatePower(float power)
    liftR->Set(ControlMode::PercentOutput, power);
 }
 
-void Lift::SetTarget(Positions target)
+void Lift::SetTarget(int target)
 {
     sumError = 0;
     pastError = 0;
