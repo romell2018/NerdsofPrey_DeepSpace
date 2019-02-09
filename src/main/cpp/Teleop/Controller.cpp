@@ -18,11 +18,7 @@ Controller::Controller()
     Operator = new frc::Joystick(0);
     flipperIntake = new FlipperIntake();
     flipper = new Flipper();
-<<<<<<< HEAD
-    //thing and another and one more and even more
-=======
     //thing and another and one more plus one
->>>>>>> c3113864a5376dfb791ab1285ed88bad84f9ad25
 }
 
 void Controller::RunScript()
