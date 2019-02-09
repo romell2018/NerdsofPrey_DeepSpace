@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Teleop/Lift.h"
+#include <iostream>
 
 Lift::Lift()
 {
@@ -50,21 +51,31 @@ void Lift::LiftOff()
 float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
 
 void Lift::ControlLift(int direction)
-{
+{   
+    std::cout << "targetPosition" << targetPosition << std::endl;
+    std::cout << "LiftPosition" << LiftPosition() << std::endl;
+
     if (targetPosition >= 0)
     {
-        UpdatePID(targetPosition);
-        manualTargetPosition = targetPosition;
+        int deltaTargetPosition = targetPosition - LiftPosition();
+        if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
+        else if(deltaTargetPosition < -MAX_DELTA) deltaTargetPosition = -MAX_DELTA;
+
+        shapedTargetPosition = LiftPosition() + deltaTargetPosition;
+        
+        std::cout << "shapedTargetPostion" << shapedTargetPosition << std::endl;
+
+        UpdatePID(shapedTargetPosition);
     }
     else
     {
         if (targetPosition == -1)//assisted manual
         {
             if(direction == 1)
-                manualTargetPosition += 50;
+                shapedTargetPosition += 50;
             if(direction == -1)
-                manualTargetPosition -= 50;
-            UpdatePID(manualTargetPosition);
+                shapedTargetPosition -= 50;
+            UpdatePID(shapedTargetPosition);
         }
         if(targetPosition == -2)//manual
         {
@@ -74,7 +85,7 @@ void Lift::ControlLift(int direction)
                 LiftOff();
             if(direction == -1)
                 LiftDown();
-            manualTargetPosition = LiftPosition();
+            shapedTargetPosition = LiftPosition();
         }
     }
 }
@@ -95,7 +106,7 @@ void Lift::UpdatePower(float power)
    liftR->Set(ControlMode::PercentOutput, power);
 }
 
-void Lift::SetTarget(Positions target)
+void Lift::SetTarget(int target)
 {
     sumError = 0;
     pastError = 0;
@@ -104,9 +115,6 @@ void Lift::SetTarget(Positions target)
 
 void Lift::UpdatePID(float target)
 {
-    kp = 0.00055;
-    ki = 0;
-    kd = 0;
     error = target - LiftPosition();
     sumError += error;
     deltaError = error - pastError;
@@ -116,10 +124,10 @@ void Lift::UpdatePID(float target)
     float output = (kp * error);// + speedStabilization; //+ (ki * sumError) + (kd * deltaError);
     output = (output < -1) ? -1 : (output > 1) ? 1 : output;
 
-    std::cout << "lift position: " << LiftPosition() << std::endl;
-    std::cout << "target: " << target << std::endl;
-    std::cout << "sum error: " << sumError << std::endl;
-    std::cout << "output: " << output << std::endl << std::endl;
+    //std::cout << "lift position: " << LiftPosition() << std::endl;
+    //std::cout << "target: " << target << std::endl;
+    //std::cout << "sum error: " << sumError << std::endl;
+    //std::cout << "output: " << output << std::endl << std::endl;
     UpdatePower(output);
     pastError = error;
 }
