@@ -13,6 +13,7 @@
 #include <Teleop/ControllerBox.h>
 #include <CameraUSB.h>
 #include <TeleOp/BlinkinLED.h>
+#include "Teleop/DeltaTime.h"
 
 #include <frc/IterativeRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
@@ -26,6 +27,7 @@ public:
   ControllerBox *controllerBox;
   CameraUSB *camera;
   BlinkinLED *led;
+  DeltaTime *delta;
 
   void RobotInit() override;
   void RobotPeriodic() override;
