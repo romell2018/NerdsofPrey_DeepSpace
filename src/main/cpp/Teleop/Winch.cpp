@@ -9,19 +9,19 @@
 
 Winch::Winch()
 {
-    winchL = new TalonSRX(10);
-    winchR = new TalonSRX(11);
+    winchR = new TalonSRX(10);
+    winchL = new TalonSRX(11);
 }
 
 void Winch::up()
 {
-    winchL->Set(ControlMode::PercentOutput, -0.5);
-    winchR->Set(ControlMode::PercentOutput, -0.5);
+    winchL->Set(ControlMode::PercentOutput, -0.9);
+    winchR->Set(ControlMode::PercentOutput, 0.9);
 }
 void Winch::down()
 {
-    winchL->Set(ControlMode::PercentOutput, 0.5);
-    winchR->Set(ControlMode::PercentOutput, 0.5);
+    winchL->Set(ControlMode::PercentOutput, -0.9);
+    winchR->Set(ControlMode::PercentOutput, 0.9);
 }
 void Winch::off()
 {

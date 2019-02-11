@@ -43,15 +43,15 @@ void Controller::RunScript()
     }
     if (Operator->GetPOV() == 0)
     {
-        //flipper->up(); //move down
+        flipper->up(); //move down
     }
     else if (Operator->GetPOV() == 180)
     {
-        //flipper->down(); //move up
+        flipper->down(); //move up
     }
     else
     {
-        //flipper->off(); //off
+        flipper->off(); //off
     }
     if (Operator->GetRawButton(4)) //pressed Y
     {
@@ -71,11 +71,11 @@ void Controller::RunScript()
 
     if(runVision)   visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));//pressed X
     else    visiontarget->Off();
-    /*
-    if(Operator->GetRawButton(0)){
+    
+    if(Operator->GetRawButton(7)){
         winch->up();
     }
-    else if(Operator->GetRawButton(0)){
+    else if(Operator->GetRawButton(8)){
         winch->down();
 
     }
@@ -83,7 +83,7 @@ void Controller::RunScript()
     {
         winch->off();
     }
-  
+  /*
     if (Operator->GetRawButton(0))
     {
         pneumatic->RunScriptForward();
