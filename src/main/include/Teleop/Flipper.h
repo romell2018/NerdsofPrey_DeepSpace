@@ -7,11 +7,15 @@
 
 #pragma once
 #include <ctre/Phoenix.h>
+#include <DigitalInput.h>
 #include <iostream>
 class Flipper {
  public:
   Flipper();
   TalonSRX *flipper;
+  frc::DigitalInput *limitSwitch;
+
+  void move(double power);
   void up();
   void down();
   void off();

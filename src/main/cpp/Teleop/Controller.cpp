@@ -25,21 +25,21 @@ void Controller::RunScript()
 {
     
     drivemode->ArcadeDrive(Operator->GetRawAxis(4), -Operator->GetRawAxis(1));
-   
+    //drivemode->TankDrive(-Operator->GetRawAxis(1), Operator->GetRawAxis(5));
     if (Operator->GetRawButton(5))
     {
         intake->In();
-        flipperIntake->In();
+        //flipperIntake->In();
     }
     else if (Operator->GetRawButton(6))
     {
         intake->Out();
-        flipperIntake->Out();
+        //flipperIntake->Out();
     }
     else
     {
         intake->Off();
-        flipperIntake->Off();
+        //flipperIntake->Off();
     }
     if (Operator->GetPOV() == 0)
     {
@@ -66,19 +66,16 @@ void Controller::RunScript()
         lift->ControlLift(0);
     }
 
-    if (Operator->GetRawButton(2)) //pressed X
-    {
-        visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));
-    }
-    else
-    {
-        visiontarget->Off();
-    }
-    /*
-    if(Operator->GetRawButton(0)){
+    if (Operator->GetRawButton(2))  runVision = true;
+    if (Operator->GetRawButton(3))  runVision = false;
+
+    if(runVision)   visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));//pressed X
+    else    visiontarget->Off();
+    
+    if(Operator->GetRawButton(7)){
         winch->up();
     }
-    else if(Operator->GetRawButton(0)){
+    else if(Operator->GetRawButton(8)){
         winch->down();
 
     }
@@ -86,7 +83,7 @@ void Controller::RunScript()
     {
         winch->off();
     }
-  
+  /*
     if (Operator->GetRawButton(0))
     {
         pneumatic->RunScriptForward();

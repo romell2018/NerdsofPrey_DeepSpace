@@ -52,14 +52,20 @@ float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
 
 void Lift::ControlLift(int direction)
 {   
-    std::cout << "targetPosition" << targetPosition << std::endl;
+    //std::cout << "targetPosition" << targetPosition << std::endl;
     std::cout << "LiftPosition" << LiftPosition() << std::endl;
 
     if (targetPosition >= 0)
     {
         int deltaTargetPosition = targetPosition - LiftPosition();
-        if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
-        else if(deltaTargetPosition < -MAX_DELTA) deltaTargetPosition = -MAX_DELTA;
+        if(LiftPosition() < SLOW_ZONE){
+            if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
+            else if(deltaTargetPosition < -MAX_SLOW_DELTA) deltaTargetPosition = -MAX_SLOW_DELTA;
+        }else{
+            if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
+            else if(deltaTargetPosition < -MAX_DELTA) deltaTargetPosition = -MAX_DELTA;
+        }
+        
 
         shapedTargetPosition = LiftPosition() + deltaTargetPosition;
         
@@ -72,9 +78,9 @@ void Lift::ControlLift(int direction)
         if (targetPosition == -1)//assisted manual
         {
             if(direction == 1)
-                shapedTargetPosition += 50;
+                shapedTargetPosition += 25;
             if(direction == -1)
-                shapedTargetPosition -= 50;
+                shapedTargetPosition -= 25;
             UpdatePID(shapedTargetPosition);
         }
         if(targetPosition == -2)//manual

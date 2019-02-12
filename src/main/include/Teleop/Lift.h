@@ -12,7 +12,9 @@
 #include <memory>
 #include <cmath>
 
-#define MAX_DELTA 50
+#define MAX_DELTA 150
+#define MAX_SLOW_DELTA 75
+#define SLOW_ZONE 1000
 
 namespace Positions
 {
@@ -21,7 +23,7 @@ namespace Positions
   diskLow = 235,
   diskMid = 2300,
   diskHigh = 4055,
-  ballLow = 2220,
+  ballLow = 1900,
   ballMid = 3560,
   ballHigh = 5900,
   floor = 50;
@@ -42,7 +44,7 @@ public:
   float sumError;
   float pastError;
   float deltaError;
-  float kp = 0.0025;//0.00055;
+  float kp = 0.0045;//0.00055;
   float ki = 0;
   float kd = 0;
   //float maxSpeed = 100;

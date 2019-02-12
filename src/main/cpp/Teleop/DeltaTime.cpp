@@ -2,21 +2,19 @@
 
 namespace team
 {
-namespace DeltaTime
+void DeltaTime::Init()
 {
-void InitializeLoop()
-{
-    time_point_start_ = hr_clock::now();
-    std::thread th([&]()
-    {
-        while(true)
-        {
-            time_point_end_ = time_point_start_;
-            time_point_start_ = hr_clock::now();
-            elapsed_ = time_point_end_ - time_point_start_;
-        }
-    });
-    th.detach();
+    time_point_end_ = s_clock::now();
 }
+
+double DeltaTime::GetElapsed()
+{
+    return elapsed_.count();
+}
+
+void DeltaTime::UpdateElapsed(){
+    time_point_start_ = time_point_end_;
+    time_point_end_ = s_clock::now();
+    elapsed_ = time_point_end_ - time_point_start_;
 }
 }

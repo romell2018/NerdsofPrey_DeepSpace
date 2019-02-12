@@ -10,8 +10,11 @@
 Flipper::Flipper() 
 {
     flipper = new TalonSRX(9);
+    limitSwitch = new frc::DigitalInput(8);
 }
+void Flipper::move(double power){
 
+}
 void Flipper::up()
 {
     flipper->Set(ControlMode::PercentOutput, -0.6);
@@ -19,9 +22,12 @@ void Flipper::up()
 void Flipper::down()
 {
     flipper->Set(ControlMode::PercentOutput, 0.6);
+    if(limitSwitch->Get() == true){
+        flipper->Set(ControlMode::PercentOutput, 0.0);
+    }
 }
 void Flipper::off()
 {
-    flipper->Set(ControlMode::PercentOutput, -0.09);
+    flipper->Set(ControlMode::PercentOutput, 0.0);
 }
 

@@ -28,6 +28,7 @@ public:
   Intake *intake;
   VisionTarget *visiontarget;
   Winch *winch;
+  bool runVision = false;
 
   Controller();
   void RunScript();
