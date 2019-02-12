@@ -1,7 +1,9 @@
 #include "Teleop/DeltaTime.h"
 
-using namespace team::DeltaTime;
-
+namespace team
+{
+namespace DeltaTime
+{
 void InitializeLoop()
 {
     time_point_start_ = hr_clock::now();
@@ -15,4 +17,6 @@ void InitializeLoop()
         }
     });
     th.detach();
+}
+}
 }
