@@ -20,8 +20,8 @@ void Winch::up()
 }
 void Winch::down()
 {
-    winchL->Set(ControlMode::PercentOutput, -0.9);
-    winchR->Set(ControlMode::PercentOutput, 0.9);
+    winchL->Set(ControlMode::PercentOutput, 0.9);
+    winchR->Set(ControlMode::PercentOutput, -0.9);
 }
 void Winch::off()
 {

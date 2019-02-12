@@ -25,7 +25,7 @@ void DriveMode::ArcadeDrive(double moveVal, double rotateVal)
     // Clamp moveVal and rotateVal.
     // Assume a deadzone is already being applied to these values.
     moveVal = joystick->sensitivity(moveVal, 1);
-    rotateVal = joystick->sensitivity(rotateVal, 1);
+    rotateVal = joystick->sensitivity(rotateVal, 0.4);
 
     //combine varibles
     leftPercent = moveVal + rotateVal;
