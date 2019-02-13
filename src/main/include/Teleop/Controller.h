@@ -16,12 +16,11 @@
 #include <Teleop/Winch.h>
 #include <frc/WPILib.h>
 
-
 class Controller
 {
 public:
   DriveMode *drivemode;
-  Flipper *flipper;
+  Flipper *hatchPanel;
   FlipperIntake *flipperIntake;
   std::shared_ptr<Lift> lift;
   Pneumatic *pneumatic;
@@ -31,9 +30,8 @@ public:
   bool runVision = false;
 
   Controller();
-  void RunScript();
-  
-  frc::Joystick *Operator;
-  //frc::Joystick *right;
+  void ControllerPeriodic();
 
+  frc::Joystick *Operator;
+  
 };

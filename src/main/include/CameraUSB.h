@@ -7,13 +7,13 @@
 
 #pragma once
 #include <frc/WPILib.h>
-#include <cameraserver/CameraServer.h>
+#include <cameraserver/CameraServer.h> // Library for the camera to work
 
 class CameraUSB
 {
 public:
   CameraUSB();
-
   void RunScript();
+
   cs::UsbCamera cam1;
 };

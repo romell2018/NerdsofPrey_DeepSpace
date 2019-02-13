@@ -6,15 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <ctre/Phoenix.h>
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
+#include <ctre/Phoenix.h> // Library for motor controller
 #include <iostream>
 
-class Winch {
- public:
+class Winch
+{
+public:
   Winch();
-  void up();
-  void down();
-  void off();
+  void WinchUp();
+  void WinchDown();
+  void WinchOff();
+  
+  // Manipulator Motors
   TalonSRX *winchL;
   TalonSRX *winchR;
 };

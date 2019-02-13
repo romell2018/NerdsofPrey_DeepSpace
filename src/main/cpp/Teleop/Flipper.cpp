@@ -7,27 +7,24 @@
 
 #include "Teleop/Flipper.h"
 //id 09
-Flipper::Flipper() 
+Flipper::Flipper()
 {
     flipper = new TalonSRX(9);
     limitSwitch = new frc::DigitalInput(8);
 }
-void Flipper::move(double power){
-
-}
-void Flipper::up()
+void Flipper::HookUp()
 {
     flipper->Set(ControlMode::PercentOutput, -0.6);
 }
-void Flipper::down()
+void Flipper::HookDown()
 {
     flipper->Set(ControlMode::PercentOutput, 0.6);
-    if(limitSwitch->Get() == true){
+    if (limitSwitch->Get() == true)
+    {
         flipper->Set(ControlMode::PercentOutput, 0.0);
     }
 }
-void Flipper::off()
+void Flipper::HookOff()
 {
     flipper->Set(ControlMode::PercentOutput, 0.0);
 }
-

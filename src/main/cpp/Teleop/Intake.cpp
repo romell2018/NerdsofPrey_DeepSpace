@@ -7,15 +7,19 @@
 
 #include "Teleop/Intake.h"
 
-Intake::Intake() {
+Intake::Intake()
+{
     intake = new TalonSRX(7);
 }
-void Intake::In(){
+void Intake::In()
+{
     intake->Set(ControlMode::PercentOutput, -0.57);
 }
-void Intake::Out(){
+void Intake::Out()
+{
     intake->Set(ControlMode::PercentOutput, 0.57);
 }
-void Intake::Off(){
+void Intake::Off()
+{
     intake->Set(ControlMode::PercentOutput, 0);
 }

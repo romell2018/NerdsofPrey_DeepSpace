@@ -7,6 +7,7 @@
 
 #pragma once
 #include <frc/WPILib.h>
+#include <frc/Solenoid.h> // Library for pistons (solenoids)
 
 class Pneumatic
 {

@@ -12,7 +12,6 @@ Lift::Lift()
 {
     liftL = new TalonSRX(5);
     liftR = new TalonSRX(6);
-    //limitSwitch = new frc::DigitalInput(0);
 
     liftL->SetSelectedSensorPosition(0, 0, 10); //set encoder
     liftR->SetSelectedSensorPosition(0, 0, 10); //set encoder
@@ -25,16 +24,17 @@ void Lift::LiftUp()
 {
     pastError = 0;
     sumError = 0;
-   // UpdatePower(0.57);
+
     liftR->Set(ControlMode::PercentOutput, 0.57);
     liftL->Set(ControlMode::PercentOutput, -0.57);
-    std::cout << "Encoder Position " << LiftPosition() << std::endl;
+
+    //std::cout << "Encoder Position " << LiftPosition() << std::endl;
 }
 void Lift::LiftDown()
 {
     pastError = 0;
     sumError = 0;
-    //UpdatePower(-0.57);
+
     liftR->Set(ControlMode::PercentOutput, -0.57);
     liftL->Set(ControlMode::PercentOutput, 0.57);
 }
@@ -42,54 +42,60 @@ void Lift::LiftOff()
 {
     pastError = 0;
     sumError = 0;
-    //UpdatePower(0);
+
     liftR->Set(ControlMode::PercentOutput, 0);
     liftL->Set(ControlMode::PercentOutput, 0);
-    std::cout << "Encoder Position " << LiftPosition() << std::endl;
+    //std::cout << "Encoder Position " << LiftPosition() << std::endl;
 }
 
 float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
 
 void Lift::ControlLift(int direction)
-{   
+{
     //std::cout << "targetPosition" << targetPosition << std::endl;
-    std::cout << "LiftPosition" << LiftPosition() << std::endl;
+    //std::cout << "LiftPosition" << LiftPosition() << std::endl;
 
     if (targetPosition >= 0)
     {
         int deltaTargetPosition = targetPosition - LiftPosition();
-        if(LiftPosition() < SLOW_ZONE){
-            if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
-            else if(deltaTargetPosition < -MAX_SLOW_DELTA) deltaTargetPosition = -MAX_SLOW_DELTA;
-        }else{
-            if(deltaTargetPosition > MAX_DELTA) deltaTargetPosition = MAX_DELTA;
-            else if(deltaTargetPosition < -MAX_DELTA) deltaTargetPosition = -MAX_DELTA;
+        if (LiftPosition() < SLOW_ZONE)
+        {
+            if (deltaTargetPosition > MAX_DELTA)
+                deltaTargetPosition = MAX_DELTA;
+            else if (deltaTargetPosition < -MAX_SLOW_DELTA)
+                deltaTargetPosition = -MAX_SLOW_DELTA;
         }
-        
+        else
+        {
+            if (deltaTargetPosition > MAX_DELTA)
+                deltaTargetPosition = MAX_DELTA;
+            else if (deltaTargetPosition < -MAX_DELTA)
+                deltaTargetPosition = -MAX_DELTA;
+        }
 
         shapedTargetPosition = LiftPosition() + deltaTargetPosition;
-        
+
         std::cout << "shapedTargetPostion" << shapedTargetPosition << std::endl;
 
         UpdatePID(shapedTargetPosition);
     }
     else
     {
-        if (targetPosition == -1)//assisted manual
+        if (targetPosition == -1) //assisted manual
         {
-            if(direction == 1)
+            if (direction == 1)
                 shapedTargetPosition += 25;
-            if(direction == -1)
+            if (direction == -1)
                 shapedTargetPosition -= 25;
             UpdatePID(shapedTargetPosition);
         }
-        if(targetPosition == -2)//manual
+        if (targetPosition == -2) //manual
         {
-            if(direction == 1)
+            if (direction == 1)
                 LiftUp();
-            if(direction == 0)
+            if (direction == 0)
                 LiftOff();
-            if(direction == -1)
+            if (direction == -1)
                 LiftDown();
             shapedTargetPosition = LiftPosition();
         }
@@ -98,18 +104,8 @@ void Lift::ControlLift(int direction)
 
 void Lift::UpdatePower(float power)
 {
-    /*
-    if ((limitSwitchBottom->Get() == true && power >= 0) || limitSwitchBottom->Get() != true && limitSwitchTop->Get() != true || limitSwitchTop->Get() == true && power <= 0)
-    {
-        liftL->Set(ControlMode::PercentOutput, -power);
-        liftR->Set(ControlMode::PercentOutput, power);
-    }else{
-        liftL->Set(ControlMode::PercentOutput, 0);
-        liftR->Set(ControlMode::PercentOutput, 0);
-    }
-*/
-   liftL->Set(ControlMode::PercentOutput, -power);
-   liftR->Set(ControlMode::PercentOutput, power);
+    liftL->Set(ControlMode::PercentOutput, -power);
+    liftR->Set(ControlMode::PercentOutput, power);
 }
 
 void Lift::SetTarget(int target)
@@ -126,8 +122,8 @@ void Lift::UpdatePID(float target)
     deltaError = error - pastError;
     //float speedStabilization = 0;
     //if (std::abs(deltaError) > maxSpeed)
-        //speedStabilization = deltaError / 1000;
-    float output = (kp * error);// + speedStabilization; //+ (ki * sumError) + (kd * deltaError);
+    //speedStabilization = deltaError / 1000;
+    float output = (kp * error); // + speedStabilization; //+ (ki * sumError) + (kd * deltaError);
     output = (output < -1) ? -1 : (output > 1) ? 1 : output;
 
     //std::cout << "lift position: " << LiftPosition() << std::endl;

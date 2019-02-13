@@ -28,7 +28,7 @@ void VisionTarget::Drive(float left, float right)
     backLeft->Set(ControlMode::PercentOutput, left);
     backRight->Set(ControlMode::PercentOutput, right);
 }
-void VisionTarget::Off()
+void VisionTarget::LimelightOff()
 {
     //std::cout << "Sonic Value: " << distanceSensor->GetValue() << std::endl;
     // Get limelight table for reading tracking data
@@ -39,7 +39,7 @@ void VisionTarget::Off()
     table->PutNumber("camMode", 1); //Driver Camera (Increases exposure, disables vision processing)
 }
 
-void VisionTarget::RunScriptDiskLow(float forwardSpeed)
+void VisionTarget::LimelightOn(float forwardSpeed)
 {
 
     float Kp = 0.045f;   // Proportional control constant, control how much a mechanism can move.
@@ -64,7 +64,7 @@ void VisionTarget::RunScriptDiskLow(float forwardSpeed)
 
     //Distance Sensor
     //std::cout << "Sonic Value: " << distanceSensor->GetValue() << std::endl;
-   //std::cout << disError << std::endl;
+    //std::cout << disError << std::endl;
 
     // Distance adjust, drive to the correct distance from the goal
     if (tx > 1.0)

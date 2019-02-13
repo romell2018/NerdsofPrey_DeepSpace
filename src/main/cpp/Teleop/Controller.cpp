@@ -9,23 +9,57 @@
 
 Controller::Controller()
 {
+    // ---------------------------------------------------------------
+    // Define Controllers
+    // Define which controllers (joysticks) will be the driver or co driver for control
+    // ---------------------------------------------------------------
+
+    Operator = new frc::Joystick(0);
+
+    // ---------------------------------------------------------------
+    // Define Functions
+    // ---------------------------------------------------------------
+
     drivemode = new DriveMode();
     intake = new Intake();
     lift = std::make_shared<Lift>();
     pneumatic = new Pneumatic();
     visiontarget = new VisionTarget();
     winch = new Winch();
-    Operator = new frc::Joystick(0);
+
     flipperIntake = new FlipperIntake();
-    flipper = new Flipper();
+    hatchPanel = new Flipper();
     //thing and another and one more plus one
 }
 
-void Controller::RunScript()
+void Controller::ControllerPeriodic()
 {
-    
+    // Drive
     drivemode->ArcadeDrive(Operator->GetRawAxis(4), -Operator->GetRawAxis(1));
-    //drivemode->TankDrive(-Operator->GetRawAxis(1), Operator->GetRawAxis(5));
+    // VISION TRACKING
+    if (Operator->GetRawButton(2))
+        runVision = true;
+    if (Operator->GetRawButton(3))
+        runVision = false;
+
+    if (runVision)
+        visiontarget->LimelightOn(-0.25 * Operator->GetRawAxis(1)); //pressed X
+    else
+        visiontarget->LimelightOff();
+    // LIFT
+    if (Operator->GetRawButton(4)) //pressed Y
+    {
+        lift->ControlLift(1);
+    }
+    else if (Operator->GetRawButton(1)) //pressed A
+    {
+        lift->ControlLift(-1);
+    }
+    else
+    {
+        lift->ControlLift(0);
+    }
+    // INTAKE
     if (Operator->GetRawButton(5))
     {
         intake->In();
@@ -41,54 +75,25 @@ void Controller::RunScript()
         intake->Off();
         //flipperIntake->Off();
     }
+    // HATCH PANEL HOOK
     if (Operator->GetPOV() == 0)
     {
-        flipper->up(); //move down
+        hatchPanel->HookUp(); //move down
     }
     else if (Operator->GetPOV() == 180)
     {
-        flipper->down(); //move up
+        hatchPanel->HookDown(); //move up
     }
     else
     {
-        flipper->off(); //off
+        hatchPanel->HookOff(); //off
     }
-    if (Operator->GetRawButton(4)) //pressed Y
-    {
-        lift->ControlLift(1);
-    }
-    else if (Operator->GetRawButton(1)) //pressed A
-    {
-        lift->ControlLift(-1);
-    }
-    else
-    {
-        lift->ControlLift(0);
-    }
-
-    if (Operator->GetRawButton(2))  runVision = true;
-    if (Operator->GetRawButton(3))  runVision = false;
-
-    if(runVision)   visiontarget->RunScriptDiskLow(-0.25 * Operator->GetRawAxis(1));//pressed X
-    else    visiontarget->Off();
-    
-    if(Operator->GetRawButton(7)){
-        winch->up();
-    }
-    else if(Operator->GetRawButton(8)){
-        winch->down();
-
-    }
-    else
-    {
-        winch->off();
-    }
-  /*
-    if (Operator->GetRawButton(0))
+    // PNEUMATICS
+    if (Operator->GetPOV() == 90) //in
     {
         pneumatic->RunScriptForward();
     }
-    else if (Operator->GetRawButton(0))
+    else if (Operator->GetPOV() == 270) //out
     {
         pneumatic->RunScriptReverse();
     }
@@ -96,5 +101,18 @@ void Controller::RunScript()
     {
         pneumatic->RunScriptOff();
     }
-    */
+
+    // WINCH
+    if (Operator->GetRawButton(7))
+    {
+        winch->WinchUp();
+    }
+    else if (Operator->GetRawButton(8))
+    {
+        winch->WinchDown();
+    }
+    else
+    {
+        winch->WinchOff();
+    }
 }

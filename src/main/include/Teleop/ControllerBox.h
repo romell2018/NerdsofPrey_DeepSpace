@@ -15,6 +15,6 @@ public:
   std::shared_ptr<Lift> lift;
 
   ControllerBox(std::shared_ptr<Lift> lift);
-  void RunScript();
+  void ControllerPeriodic();
   frc::Joystick *Manipulator;
 };

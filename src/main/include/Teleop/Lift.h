@@ -6,8 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 #include <iostream>
-#include <ctre/Phoenix.h>
+#include <ctre/Phoenix.h> // Library for motor controller
 #include <frc/WPILib.h>
 #include <memory>
 #include <cmath>
@@ -18,24 +19,23 @@
 
 namespace Positions
 {
-  constexpr int manual = -2,
-  assistedManual = -1,
-  diskLow = 235,
-  diskMid = 2300,
-  diskHigh = 4055,
-  ballLow = 1900,
-  ballMid = 3560,
-  ballHigh = 5900,
-  floor = 50;
+constexpr int manual = -2,
+              assistedManual = -1,
+              diskLow = 235,
+              diskMid = 2300,
+              diskHigh = 4055,
+              ballLow = 1900,
+              ballMid = 3560,
+              ballHigh = 5900,
+              floor = 50;
 };
 
 class Lift
 {
 public:
+  // Manipulator Motors
   TalonSRX *liftR;
   TalonSRX *liftL;
-  //frc::DigitalInput* limitSwitchBottom;
-  //frc::DigitalInput* limitSwitchTop;
 
   int targetPosition = Positions::manual;
   int shapedTargetPosition = 0; //45.51111...  is one degree of rotation for the large gear
@@ -44,7 +44,7 @@ public:
   float sumError;
   float pastError;
   float deltaError;
-  float kp = 0.0045;//0.00055;
+  float kp = 0.0045; //0.00055;
   float ki = 0;
   float kd = 0;
   //float maxSpeed = 100;

@@ -6,9 +6,10 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 #include <iostream>
 #include "NetworkTables/NetworkTable.h"
-#include <ctre/Phoenix.h>
+#include <ctre/Phoenix.h> // Library for motor controller
 #include <frc/AnalogInput.h>
 
 class VisionTarget
@@ -17,23 +18,17 @@ public:
   VisionTarget();
 
   void Drive(float leftValue, float rightValue);
-  void Off();
+  void LimelightOff();
 
-  void RunScriptScoreLow();
-  void RunScriptScoreMed();
-  void RunScriptScoreHigh();
-
-  void RunScriptDiskLow(float forwardSpeed);
-  void RunScriptDiskMed();
-  void RunScriptDiskHigh();
-
+  void LimelightOn(float forwardSpeed);
+ // Drive Motors
   TalonSRX *frontLeft;
   TalonSRX *frontRight;
   TalonSRX *backLeft;
   TalonSRX *backRight;
-  
+
   frc::AnalogInput *distanceSensor;
-  
+
   float left_command;
   float right_command;
   float sumErrorAngle;

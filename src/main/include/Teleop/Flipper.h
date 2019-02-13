@@ -6,17 +6,18 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 #include <ctre/Phoenix.h>
 #include <DigitalInput.h>
 #include <iostream>
-class Flipper {
- public:
+class Flipper
+{
+public:
   Flipper();
   TalonSRX *flipper;
   frc::DigitalInput *limitSwitch;
 
-  void move(double power);
-  void up();
-  void down();
-  void off();
+  void HookUp();
+  void HookDown();
+  void HookOff();
 };

@@ -11,7 +11,10 @@ CameraUSB::CameraUSB()
 {
 }
 void CameraUSB::RunScript()
-{                 
+{
+    // ---------------------------------------------------------------
+    // Camera code - Call the cameras and tell them to display images to the dashboard
+    // ---------------------------------------------------------------
     cam1 = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
     cam1.SetResolution(640, 480);
     cam1.SetFPS(30);

@@ -9,6 +9,11 @@
 
 DriveMode::DriveMode()
 {
+    // ---------------------------------------------------------------
+    // Define Motors
+    // Define the motors to their variable names and corresponding ports on the robot
+    // ---------------------------------------------------------------
+
     frontLeft = new TalonSRX(1);
     frontRight = new TalonSRX(2);
     backLeft = new TalonSRX(3);
@@ -18,7 +23,7 @@ DriveMode::DriveMode()
 }
 void DriveMode::ArcadeDrive(double moveVal, double rotateVal)
 {
-
+    // Driving variables (Speed of the robot)
     double leftPercent = 0.0;
     double rightPercent = 0.0;
 

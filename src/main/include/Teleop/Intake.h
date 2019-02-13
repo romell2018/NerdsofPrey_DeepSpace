@@ -6,14 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 #include <iostream>
-#include <ctre/Phoenix.h>
+#include <ctre/Phoenix.h> // Library for motor controller
 
-class Intake {
+class Intake
+{
  public:
-  Intake();
-   TalonSRX *intake;
+   Intake();
    void In();
    void Out();
    void Off();
+   // Manipulator Motors
+   TalonSRX *intake;
 };

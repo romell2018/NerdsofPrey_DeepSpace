@@ -7,17 +7,20 @@
 
 #include "Teleop/FlipperIntake.h"
 
-FlipperIntake::FlipperIntake() 
+FlipperIntake::FlipperIntake()
 {
     flipperIntake = new TalonSRX(8);
 }
 
-void FlipperIntake::In(){
+void FlipperIntake::In()
+{
     flipperIntake->Set(ControlMode::PercentOutput, 0.57);
 }
-void FlipperIntake::Out(){
+void FlipperIntake::Out()
+{
     flipperIntake->Set(ControlMode::PercentOutput, -0.57);
 }
-void FlipperIntake::Off(){
+void FlipperIntake::Off()
+{
     flipperIntake->Set(ControlMode::PercentOutput, 0);
 }

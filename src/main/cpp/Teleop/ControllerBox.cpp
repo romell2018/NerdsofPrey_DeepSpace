@@ -11,44 +11,49 @@
 
 ControllerBox::ControllerBox(std::shared_ptr<Lift> lift)
 {
-     this->lift = lift;
+     // ---------------------------------------------------------------
+     // Define Controllers
+     // Define which controllers (joysticks) will be the driver or co driver for control
+     // ---------------------------------------------------------------
+
      Manipulator = new frc::Joystick(1);
+     this->lift = lift;
 }
-void ControllerBox::RunScript()
+void ControllerBox::ControllerPeriodic()
 {
-     if(Manipulator->GetRawButton(1))
+     if (Manipulator->GetRawButton(1))
      {
-          lift->SetTarget(Positions::ballHigh);//ball high
+          lift->SetTarget(Positions::ballHigh); //ball high
      }
-     if(Manipulator->GetRawButton(2))
+     if (Manipulator->GetRawButton(2))
      {
-          lift->SetTarget(Positions::ballMid);//ball mid
+          lift->SetTarget(Positions::ballMid); //ball mid
      }
-     if(Manipulator->GetRawButton(3))
+     if (Manipulator->GetRawButton(3))
      {
-          lift->SetTarget(Positions::ballLow);//ball low     
+          lift->SetTarget(Positions::ballLow); //ball low
      }
-     if(Manipulator->GetRawButton(4))
+     if (Manipulator->GetRawButton(4))
      {
-          lift->SetTarget(Positions::diskHigh);//disk high
+          lift->SetTarget(Positions::diskHigh); //disk high
      }
-     if(Manipulator->GetRawButton(5))
+     if (Manipulator->GetRawButton(5))
      {
-          lift->SetTarget(Positions::diskMid);//disk med
+          lift->SetTarget(Positions::diskMid); //disk med
      }
-     if(Manipulator->GetRawButton(6))
+     if (Manipulator->GetRawButton(6))
      {
-          lift->SetTarget(Positions::diskLow);//disk low
+          lift->SetTarget(Positions::diskLow); //disk low
      }
-     if(Manipulator->GetRawButton(7))//assisted manual
+     if (Manipulator->GetRawButton(7)) //assisted manual
      {
           lift->SetTarget(Positions::assistedManual);
      }
-     if(Manipulator->GetRawButton(8))//maunal
+     if (Manipulator->GetRawButton(8)) //maunal
      {
           lift->SetTarget(Positions::manual);
      }
-     if(Manipulator->GetRawButton(9))
+     if (Manipulator->GetRawButton(9))
      {
           lift->SetTarget(Positions::floor);
      }

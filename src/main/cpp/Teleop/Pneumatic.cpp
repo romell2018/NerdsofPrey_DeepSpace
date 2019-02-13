@@ -9,6 +9,11 @@
 
 Pneumatic::Pneumatic()
 {
+    // ---------------------------------------------------------------
+    // Define Pneumatics/Compressor
+    // Define the Compressor and pneumatics pistons to their variable names and corresponding ports on the robot
+    // ---------------------------------------------------------------
+
     compressor = new frc::Compressor(0);
 
     db = new frc::DoubleSolenoid(0, 1);

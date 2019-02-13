@@ -6,18 +6,21 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 
 #include <iostream>
-#include <ctre/Phoenix.h>
+#include <ctre/Phoenix.h> // Library for motor controller
 #include <Teleop/ExtraMath.h>
 class DriveMode
 {
 public:
   DriveMode();
   ExtraMath *joystick;
+  
   void ArcadeDrive(double moveVal, double rotateVal);
   void TankDrive(double leftValue, double rightValue);
 
+  // Drive Motors
   TalonSRX *frontLeft;
   TalonSRX *frontRight;
   TalonSRX *backLeft;

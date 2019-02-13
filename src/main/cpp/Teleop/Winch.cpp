@@ -13,17 +13,17 @@ Winch::Winch()
     winchL = new TalonSRX(11);
 }
 
-void Winch::up()
+void Winch::WinchUp()
 {
     winchL->Set(ControlMode::PercentOutput, -0.9);
     winchR->Set(ControlMode::PercentOutput, 0.9);
 }
-void Winch::down()
+void Winch::WinchDown()
 {
     winchL->Set(ControlMode::PercentOutput, 0.9);
     winchR->Set(ControlMode::PercentOutput, -0.9);
 }
-void Winch::off()
+void Winch::WinchOff()
 {
     winchL->Set(ControlMode::PercentOutput, 0);
     winchR->Set(ControlMode::PercentOutput, 0);
