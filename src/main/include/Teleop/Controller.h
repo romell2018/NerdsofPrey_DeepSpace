@@ -7,8 +7,8 @@
 
 #pragma once
 #include <Teleop/DriveMode.h>
-#include <Teleop/Flipper.h>
-#include <Teleop/FlipperIntake.h>
+#include <Teleop/Hatch.h>
+#include <Teleop/IntakeLow.h>
 #include <Teleop/Intake.h>
 #include <Teleop/Lift.h>
 #include <Teleop/Pneumatic.h>
@@ -20,11 +20,11 @@ class Controller
 {
 public:
   DriveMode *drivemode;
-  Flipper *hatchPanel;
-  FlipperIntake *flipperIntake;
+  Hatch *hatchPanel;
   std::shared_ptr<Lift> lift;
   Pneumatic *pneumatic;
   Intake *intake;
+  IntakeLow *intakeLow;
   VisionTarget *visiontarget;
   Winch *winch;
   bool runVision = false;

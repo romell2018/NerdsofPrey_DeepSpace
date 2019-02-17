@@ -66,7 +66,10 @@ void Robot::AutonomousInit() {
   controller->lift->targetPosition = Positions::start;
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() {
+  controller->ControllerPeriodic(delta->GetElapsed());
+  controllerBox->ControllerPeriodic();
+}
 
 void Robot::TeleopInit()
 {

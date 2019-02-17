@@ -27,8 +27,8 @@ Controller::Controller()
     visiontarget = new VisionTarget();
     winch = new Winch();
 
-    flipperIntake = new FlipperIntake();
-    hatchPanel = new Flipper();
+    intakeLow = new IntakeLow();
+    hatchPanel = new Hatch();
     //thing and another and one more plus one
 }
 
@@ -64,30 +64,30 @@ void Controller::ControllerPeriodic(double deltaTime)
     if (Operator->GetRawButton(5))
     {
         intake->In();
-        flipperIntake->In();
+        intakeLow->In();
     }
     else if (Operator->GetRawButton(6))
     {
         intake->Out();
-        flipperIntake->Out();
+        intakeLow->Out();
     }
     else
     {
         intake->Off();
-        flipperIntake->Off();
+        intakeLow->Off();
     }
     // HATCH PANEL HOOK
     if (Operator->GetPOV() == 0)
     {
-        hatchPanel->HookUp(); //move down
+        hatchPanel->HatchUp(); //move down
     }
     else if (Operator->GetPOV() == 180)
     {
-        hatchPanel->HookDown(); //move up
+        hatchPanel->HatchDown(); //move up
     }
     else
     {
-        hatchPanel->HookOff(); //off
+        hatchPanel->HatchOff(); //off
     }
     // PNEUMATICS
     if (Operator->GetPOV() == 90) //in

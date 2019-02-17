@@ -5,22 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Teleop/FlipperIntake.h"
+#include "Hatch.h"
 
-FlipperIntake::FlipperIntake()
-{
-    flipperIntake = new TalonSRX(8);
+Hatch::Hatch() {
+    hatch = new TalonSRX(9);
+    limitSwitch = new frc::DigitalInput(0);
 }
-
-void FlipperIntake::In()
+void Hatch::HatchUp()
 {
-    flipperIntake->Set(ControlMode::PercentOutput, 0.57);
+    hatch->Set(ControlMode::PercentOutput, -SPEED);
 }
-void FlipperIntake::Out()
+void Hatch::HatchDown()
 {
-    flipperIntake->Set(ControlMode::PercentOutput, -0.57);
+    hatch->Set(ControlMode::PercentOutput, SPEED);
+    if (limitSwitch->Get() == true)
+    {
+        hatch->Set(ControlMode::PercentOutput, 0.0);
+    }
 }
-void FlipperIntake::Off()
+void Hatch::HatchOff()
 {
-    flipperIntake->Set(ControlMode::PercentOutput, 0);
+    hatch->Set(ControlMode::PercentOutput, 0.0);
 }

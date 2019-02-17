@@ -5,26 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Teleop/Flipper.h"
-//id 09
-Flipper::Flipper()
-{
-    flipper = new TalonSRX(9);
-    limitSwitch = new frc::DigitalInput(0);
-}
-void Flipper::HookUp()
-{
-    flipper->Set(ControlMode::PercentOutput, -SPEED);
-}
-void Flipper::HookDown()
-{
-    flipper->Set(ControlMode::PercentOutput, SPEED);
-    if (limitSwitch->Get() == true)
-    {
-        flipper->Set(ControlMode::PercentOutput, 0.0);
-    }
-}
-void Flipper::HookOff()
-{
-    flipper->Set(ControlMode::PercentOutput, 0.0);
-}
+#pragma once
+// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
+#include <ctre/Phoenix.h>
+#include <DigitalInput.h>
+#include <iostream>
+
+class Hatch {
+ public:
+  Hatch();
+  TalonSRX *hatch;
+  frc::DigitalInput *limitSwitch;
+
+  const double SPEED = 0.5;
+
+  void HatchUp();
+  void HatchDown();
+  void HatchOff();
+};

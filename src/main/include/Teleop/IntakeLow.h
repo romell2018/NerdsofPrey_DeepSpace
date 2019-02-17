@@ -6,20 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-// FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
-#include <ctre/Phoenix.h>
-#include <DigitalInput.h>
 #include <iostream>
-class Flipper
-{
-public:
-  Flipper();
-  TalonSRX *flipper;
-  frc::DigitalInput *limitSwitch;
-
-  const double SPEED = 0.5;
-
-  void HookUp();
-  void HookDown();
-  void HookOff();
+#include <ctre/Phoenix.h>
+class IntakeLow {
+ public:
+  IntakeLow();
+  TalonSRX *intakeLow;
+   void In();
+   void Out();
+   void Off();
 };

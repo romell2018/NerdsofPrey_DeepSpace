@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
-#include <iostream>
-#include <ctre/Phoenix.h>
+#include "IntakeLow.h"
 
-class FlipperIntake {
- public:
-  FlipperIntake();
-   TalonSRX *flipperIntake;
-   void In();
-   void Out();
-   void Off();
-
-};
+IntakeLow::IntakeLow() {
+    intakeLow = new TalonSRX(8);
+}
+void IntakeLow::In()
+{
+    intakeLow->Set(ControlMode::PercentOutput, 0.57);
+}
+void IntakeLow::Out()
+{
+    intakeLow->Set(ControlMode::PercentOutput, -0.57);
+}
+void IntakeLow::Off()
+{
+    intakeLow->Set(ControlMode::PercentOutput, 0);
+}
