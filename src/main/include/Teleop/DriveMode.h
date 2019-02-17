@@ -17,7 +17,7 @@ public:
   DriveMode();
   ExtraMath *joystick;
   
-  void ArcadeDrive(double moveVal, double rotateVal);
+  void ArcadeDrive(double moveVal, double rotateVal, double deltaTime);
   void TankDrive(double leftValue, double rightValue);
 
   // Drive Motors
@@ -25,4 +25,13 @@ public:
   TalonSRX *frontRight;
   TalonSRX *backLeft;
   TalonSRX *backRight;
+
+  double leftOutput;
+  double rightOutput;
+
+  
+  const double MOVEMENT_GAIN = 3;
+  const double BREAK_GAIN = 3;
+  const double TARGET_THRESHOLD = 0.1;
+  const double BREAK_THRESHOLD = 0.1;
 };

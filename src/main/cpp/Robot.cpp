@@ -57,26 +57,29 @@ void Robot::RobotInit()
   led = new BlinkinLED();
   camera->RunScript(); //runs usbcam(s)
   delta = new team::DeltaTime();
+  controller->lift->targetPosition = Positions::start;
 }
 
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit() {
+  controller->lift->targetPosition = Positions::start;
+}
 
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit()
 {
   led->RunScriptBlue();
-  controller->lift->targetPosition = Positions::manual;
+  controller->lift->targetPosition = Positions::start;
 }
 
 void Robot::TeleopPeriodic()
 {
   delta->UpdateElapsed();
-  controller->ControllerPeriodic();
+  controller->ControllerPeriodic(delta->GetElapsed());
   controllerBox->ControllerPeriodic();
-  std::cout << "Elapsed Time: " << delta->GetElapsed() << std::endl;
+  //std::cout << "Elapsed Time: " << delta->GetElapsed() << std::endl;
 }
 
 void Robot::TestPeriodic() {}

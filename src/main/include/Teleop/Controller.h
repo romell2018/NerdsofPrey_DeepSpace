@@ -30,7 +30,7 @@ public:
   bool runVision = false;
 
   Controller();
-  void ControllerPeriodic();
+  void ControllerPeriodic(double deltaTime);
 
   frc::Joystick *Operator;
   

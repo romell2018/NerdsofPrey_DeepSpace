@@ -9,7 +9,7 @@
 
 BlinkinLED::BlinkinLED()
 {
-    led = new frc::Spark(1);
+    led = new frc::Spark(0);
 }
 
 void BlinkinLED::RunScriptBlue()

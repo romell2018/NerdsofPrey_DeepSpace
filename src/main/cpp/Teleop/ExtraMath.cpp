@@ -8,7 +8,3 @@
 #include "Teleop/ExtraMath.h"
 
 ExtraMath::ExtraMath() {}
-double ExtraMath::sensitivity(double val, double sensitivity)
-{
-	return val * sensitivity;
-}

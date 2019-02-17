@@ -17,6 +17,8 @@ public:
   TalonSRX *flipper;
   frc::DigitalInput *limitSwitch;
 
+  const double SPEED = 0.5;
+
   void HookUp();
   void HookDown();
   void HookOff();

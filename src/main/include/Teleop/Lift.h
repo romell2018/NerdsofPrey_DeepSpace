@@ -21,14 +21,15 @@ namespace Positions
 {
 constexpr int manual = -2,
               assistedManual = -1,
-              diskLow = 235,
-              diskMid = 2300,
-              diskHigh = 4055,
+              diskLow = 456,
+              diskMid = 2660,
+              diskHigh = 4382,
               ballLow = 1900,
               ballMid = 3560,
               ballHigh = 5900,
-              floor = 50;
-};
+              floor = 150,
+              start = 500;
+}
 
 class Lift
 {
@@ -37,7 +38,7 @@ public:
   TalonSRX *liftR;
   TalonSRX *liftL;
 
-  int targetPosition = Positions::manual;
+  int targetPosition = Positions::start;
   int shapedTargetPosition = 0; //45.51111...  is one degree of rotation for the large gear
 
   float error;

@@ -42,7 +42,7 @@ void VisionTarget::LimelightOff()
 void VisionTarget::LimelightOn(float forwardSpeed)
 {
 
-    float Kp = 0.045f;   // Proportional control constant, control how much a mechanism can move.
+    float Kp = 0.035f;   // Proportional control constant, control how much a mechanism can move.
     float Ki = 0.00005f; //sum of all the past error, increase more and more the longer the motor isn’t where it’s supposed to be.
     float KpDist = 0.001f;
     float disError = 370 - distanceSensor->GetValue();

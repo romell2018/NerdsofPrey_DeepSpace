@@ -32,10 +32,10 @@ Controller::Controller()
     //thing and another and one more plus one
 }
 
-void Controller::ControllerPeriodic()
+void Controller::ControllerPeriodic(double deltaTime)
 {
     // Drive
-    drivemode->ArcadeDrive(Operator->GetRawAxis(4), -Operator->GetRawAxis(1));
+    drivemode->ArcadeDrive(-Operator->GetRawAxis(1), Operator->GetRawAxis(4), deltaTime);
     // VISION TRACKING
     if (Operator->GetRawButton(2))
         runVision = true;
@@ -59,21 +59,22 @@ void Controller::ControllerPeriodic()
     {
         lift->ControlLift(0);
     }
+
     // INTAKE
     if (Operator->GetRawButton(5))
     {
         intake->In();
-        //flipperIntake->In();
+        flipperIntake->In();
     }
     else if (Operator->GetRawButton(6))
     {
         intake->Out();
-        //flipperIntake->Out();
+        flipperIntake->Out();
     }
     else
     {
         intake->Off();
-        //flipperIntake->Off();
+        flipperIntake->Off();
     }
     // HATCH PANEL HOOK
     if (Operator->GetPOV() == 0)

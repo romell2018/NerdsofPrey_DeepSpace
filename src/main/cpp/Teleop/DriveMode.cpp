@@ -18,33 +18,51 @@ DriveMode::DriveMode()
     frontRight = new TalonSRX(2);
     backLeft = new TalonSRX(3);
     backRight = new TalonSRX(4);
-
-    joystick = new ExtraMath();
 }
-void DriveMode::ArcadeDrive(double moveVal, double rotateVal)
+void DriveMode::ArcadeDrive(double moveVal, double rotateVal, double deltaTime)
 {
     // Driving variables (Speed of the robot)
-    double leftPercent = 0.0;
-    double rightPercent = 0.0;
+    double leftTarget = 0.0;
+    double rightTarget = 0.0;
 
-    // Clamp moveVal and rotateVal.
+    // Reshapes moveVal and rotateVal.
     // Assume a deadzone is already being applied to these values.
-    moveVal = joystick->sensitivity(moveVal, 1);
-    rotateVal = joystick->sensitivity(rotateVal, 0.4);
+    moveVal = ExtraMath::sensitivity(moveVal, 1);
+    rotateVal = ExtraMath::sensitivity(rotateVal, 0.75);
 
     //combine varibles
-    leftPercent = moveVal + rotateVal;
-    rightPercent = moveVal - rotateVal;
+    leftTarget = moveVal + rotateVal;
+    rightTarget = moveVal - rotateVal;
 
-    // Clamp motor percents
-    leftPercent = joystick->sensitivity(leftPercent, 0.75);
-    rightPercent = joystick->sensitivity(rightPercent, 0.75);
+    double gain = 0;
+
+    if(std::abs(moveVal) < BREAK_THRESHOLD) gain = BREAK_GAIN;
+    else gain = MOVEMENT_GAIN;
+    
+    if(std::abs(leftOutput - leftTarget) < TARGET_THRESHOLD) leftOutput = leftTarget;
+    else if(leftOutput < leftTarget) leftOutput += deltaTime * gain;
+    else if(leftOutput > leftTarget) leftOutput -= deltaTime * gain;
+
+    if(std::abs(rightOutput - rightTarget) < TARGET_THRESHOLD) rightOutput = rightTarget;
+    else if(rightOutput < rightTarget) rightOutput += deltaTime * gain;
+    else if(rightOutput > rightTarget) rightOutput -= deltaTime * gain;
 
     // Apply speeds to motors
-    frontLeft->Set(ControlMode::PercentOutput, leftPercent);
-    frontRight->Set(ControlMode::PercentOutput, rightPercent); //if failed add ( * -1)
-    backLeft->Set(ControlMode::PercentOutput, leftPercent);
-    backRight->Set(ControlMode::PercentOutput, rightPercent); //if failed add ( * -1)
+    std::cout << leftTarget << std::endl;
+    std::cout << rightTarget << std::endl;
+    std::cout << leftOutput << std::endl;
+    std::cout << rightOutput << std::endl;
+    std::cout << std::endl;
+
+    //frontLeft->Set(ControlMode::PercentOutput, leftTarget);
+    //frontRight->Set(ControlMode::PercentOutput, -rightTarget);
+    //backLeft->Set(ControlMode::PercentOutput, leftTarget);
+    //backRight->Set(ControlMode::PercentOutput, -rightTarget);
+
+    frontLeft->Set(ControlMode::PercentOutput, leftOutput);
+    frontRight->Set(ControlMode::PercentOutput, -rightOutput);
+    backLeft->Set(ControlMode::PercentOutput, leftOutput);
+    backRight->Set(ControlMode::PercentOutput, -rightOutput);
 }
 void DriveMode::TankDrive(double leftValue, double rightValue)
 {

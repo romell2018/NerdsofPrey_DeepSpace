@@ -11,5 +11,8 @@ class ExtraMath
 {
 public:
   ExtraMath();
-  double sensitivity(double val, double sensitivity);
+  static double sensitivity(double val, double sensitivity)
+  {
+	  return val * sensitivity;
+  }
 };
