@@ -10,6 +10,8 @@
 Hatch::Hatch() {
     hatch = new TalonSRX(9);
     limitSwitch = new frc::DigitalInput(0);
+    hatchCounter = new frc::Counter(frc::DigitalInput(1));
+    hatchPosition = hatchCounter->get();
 }
 void Hatch::HatchUp()
 {

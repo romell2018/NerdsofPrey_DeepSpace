@@ -8,7 +8,8 @@
 #pragma once
 // FOR PROGRAM TO WORK CTRE-Phoenix LIBRARY MUST BE DOWNLOADED
 #include <ctre/Phoenix.h>
-#include <DigitalInput.h>
+#include <frc/DigitalInput.h>
+#include <frc/Counter.h>
 #include <iostream>
 
 class Hatch {
@@ -16,7 +17,9 @@ class Hatch {
   Hatch();
   TalonSRX *hatch;
   frc::DigitalInput *limitSwitch;
+  frc::Counter *hatchCounter;
 
+  int hatchPosition;
   const double SPEED = 0.5;
 
   void HatchUp();

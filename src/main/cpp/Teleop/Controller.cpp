@@ -22,14 +22,12 @@ Controller::Controller()
 
     drivemode = new DriveMode();
     intake = new Intake();
+    intakeLow = new IntakeLow();
+    hatchPanel = new Hatch();
     lift = std::make_shared<Lift>();
     pneumatic = new Pneumatic();
     visiontarget = new VisionTarget();
     winch = new Winch();
-
-    intakeLow = new IntakeLow();
-    hatchPanel = new Hatch();
-    //thing and another and one more plus one
 }
 
 void Controller::ControllerPeriodic(double deltaTime)
@@ -43,9 +41,10 @@ void Controller::ControllerPeriodic(double deltaTime)
         runVision = false;
 
     if (runVision)
-        visiontarget->LimelightOn(-0.25 * Operator->GetRawAxis(1)); //pressed X
+        visiontarget->LimelightOn(-0.25 * Operator->GetRawAxis(1)); 
     else
         visiontarget->LimelightOff();
+
     // LIFT
     if (Operator->GetRawButton(4)) //pressed Y
     {
@@ -76,6 +75,7 @@ void Controller::ControllerPeriodic(double deltaTime)
         intake->Off();
         intakeLow->Off();
     }
+
     // HATCH PANEL HOOK
     if (Operator->GetPOV() == 0)
     {
@@ -89,6 +89,7 @@ void Controller::ControllerPeriodic(double deltaTime)
     {
         hatchPanel->HatchOff(); //off
     }
+    
     // PNEUMATICS
     if (Operator->GetPOV() == 90) //in
     {
