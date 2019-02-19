@@ -5,17 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Hatch.h"
+#include "Teleop/Hatch.h"
 
 Hatch::Hatch() {
     hatch = new TalonSRX(9);
     limitSwitch = new frc::DigitalInput(0);
-    hatchCounter = new frc::Counter(frc::DigitalInput(1));
-    hatchPosition = hatchCounter->get();
+    hatchCounter = new frc::Counter(1);
+    hatchCounter->SetUpSource(1);
+    hatchCounter->SetDownSource(1);
+    hatchCounter->SetUpDownCounterMode();
+    hatchPosition = hatchCounter->Get();
 }
 void Hatch::HatchUp()
 {
     hatch->Set(ControlMode::PercentOutput, -SPEED);
+    hatchPosition += hatchCounter->Get();
 }
 void Hatch::HatchDown()
 {
@@ -23,9 +27,13 @@ void Hatch::HatchDown()
     if (limitSwitch->Get() == true)
     {
         hatch->Set(ControlMode::PercentOutput, 0.0);
+        hatchPosition = 0;
+    }else{
+        hatchPosition -= 1;
     }
 }
 void Hatch::HatchOff()
 {
+    std::cout <<"Hatch: " << hatchCounter->Get() << std::endl << std::endl;
     hatch->Set(ControlMode::PercentOutput, 0.0);
 }

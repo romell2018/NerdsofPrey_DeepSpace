@@ -23,10 +23,10 @@ constexpr int manual = -2,
               assistedManual = -1,
               diskLow = 456,
               diskMid = 2660,
-              diskHigh = 4382,
+              diskHigh = 4100,
               ballLow = 1900,
               ballMid = 3560,
-              ballHigh = 5900,
+              ballHigh = 5800,
               floor = 150,
               start = 500;
 }
@@ -38,7 +38,7 @@ public:
   TalonSRX *liftR;
   TalonSRX *liftL;
 
-  int targetPosition = Positions::start;
+  int targetPosition = Positions::manual;
   int shapedTargetPosition = 0; //45.51111...  is one degree of rotation for the large gear
 
   float error;

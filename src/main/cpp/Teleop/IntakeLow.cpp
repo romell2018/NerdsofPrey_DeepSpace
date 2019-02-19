@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "IntakeLow.h"
+#include "Teleop/IntakeLow.h"
 
 IntakeLow::IntakeLow() {
     intakeLow = new TalonSRX(8);
 }
 void IntakeLow::In()
 {
-    intakeLow->Set(ControlMode::PercentOutput, 0.57);
+    intakeLow->Set(ControlMode::PercentOutput, 1);
 }
 void IntakeLow::Out()
 {
-    intakeLow->Set(ControlMode::PercentOutput, -0.57);
+    intakeLow->Set(ControlMode::PercentOutput, -1);
 }
 void IntakeLow::Off()
 {
