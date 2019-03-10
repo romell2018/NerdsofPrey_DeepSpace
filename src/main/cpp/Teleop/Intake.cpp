@@ -13,7 +13,7 @@ Intake::Intake()
 }
 void Intake::In()
 {
-    intake->Set(ControlMode::PercentOutput, -1);
+    intake->Set(ControlMode::PercentOutput, -0.6);
 }
 void Intake::Out()
 {

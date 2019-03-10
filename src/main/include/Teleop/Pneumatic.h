@@ -18,5 +18,6 @@ public:
   void RunScriptOff();
 
   frc::Compressor *compressor;
-  frc::DoubleSolenoid *db;
+  frc::DoubleSolenoid *left;
+  frc::DoubleSolenoid *right;
 };

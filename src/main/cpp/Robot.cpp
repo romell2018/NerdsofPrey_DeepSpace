@@ -43,7 +43,6 @@ DDDDDDD         DDDDDDD. DDDDDDD  DDDDDDDD  7DDDDDDDDDDDDD     DDDDDDD
 DDDDDDD        DDDDDDDD DDDDDDD   .DDDDDDDD DDDDDDDDDDDD       DDDDDDD*/
 
 #include "Robot.h"
-
 #include <iostream>
 
 #include <frc/smartdashboard/SmartDashboard.h> // Library to connect the code and the driver station
@@ -64,12 +63,12 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {
+  led->RunScriptBlue();
   //controller->lift->targetPosition = Positions::start;
 }
 
 void Robot::AutonomousPeriodic() {
-  controller->ControllerPeriodic(delta->GetElapsed());
-  controllerBox->ControllerPeriodic();
+  TeleopPeriodic();
 }
 
 void Robot::TeleopInit()

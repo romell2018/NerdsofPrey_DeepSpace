@@ -16,19 +16,23 @@ Pneumatic::Pneumatic()
 
     compressor = new frc::Compressor(0);
 
-    db = new frc::DoubleSolenoid(0, 1);
+    left = new frc::DoubleSolenoid(0, 1);
+    right = new frc::DoubleSolenoid(2, 3);
 
     compressor->SetClosedLoopControl(true);
 }
 void Pneumatic::RunScriptForward()
 {
-    db->Set(frc::DoubleSolenoid::Value::kForward);
+    left->Set(frc::DoubleSolenoid::Value::kForward);
+    right->Set(frc::DoubleSolenoid::Value::kForward);
 }
 void Pneumatic::RunScriptReverse()
 {
-    db->Set(frc::DoubleSolenoid::Value::kReverse);
+    left->Set(frc::DoubleSolenoid::Value::kReverse);
+    right->Set(frc::DoubleSolenoid::Value::kReverse);
 }
 void Pneumatic::RunScriptOff()
 {
-    db->Set(frc::DoubleSolenoid::Value::kOff);
+    left->Set(frc::DoubleSolenoid::Value::kOff);
+    right->Set(frc::DoubleSolenoid::Value::kOff);
 }
