@@ -57,13 +57,16 @@ void Robot::RobotInit()
   camera->RunScript(); //runs usbcam(s)
   delta = new team::DeltaTime();
   controller->lift->targetPosition = Positions::manual;
+  controller->drivemode->leftOutput = 0;
+  controller->drivemode->rightOutput = 0;
   //controller->lift->targetPosition = Positions::start;
 }
 
 void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {
-  led->RunScriptBlue();
+  //led->RunScriptBlue();
+  led->RunScriptRed();
   //controller->lift->targetPosition = Positions::start;
 }
 
@@ -73,7 +76,8 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit()
 {
-  led->RunScriptBlue();
+  //led->RunScriptBlue();
+  led->RunScriptRed();
   //controller->lift->targetPosition = Positions::start;
 }
 

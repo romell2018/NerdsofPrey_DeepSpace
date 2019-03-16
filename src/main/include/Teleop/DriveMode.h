@@ -30,8 +30,8 @@ public:
   double rightOutput;
 
   
-  const double MOVEMENT_GAIN = 3;
-  const double BREAK_GAIN = 3;
+  const double MOVEMENT_GAIN = 1.3;
+  const double BREAK_GAIN = 2.5;
   const double TARGET_THRESHOLD = 0.1;
   const double BREAK_THRESHOLD = 0.1;
 };

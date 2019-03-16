@@ -45,7 +45,7 @@ void VisionTarget::LimelightOn(float forwardSpeed)
     float Kp = 0.030f;   // Proportional control constant, control how much a mechanism can move.
     float Ki = 0.000055f; //sum of all the past error, increase more and more the longer the motor isn’t where it’s supposed to be.
     float KpDist = 0.001f;
-    float disError = 370 - distanceSensor->GetValue();
+    //float disError = 370 - distanceSensor->GetValue();
     //we calculated the error in heading and multiplied that by a constant,
     //thus making a motor command which is proportional to the error.
 
@@ -54,7 +54,7 @@ void VisionTarget::LimelightOn(float forwardSpeed)
     std::shared_ptr<NetworkTable> table = NetworkTable::GetTable("limelight");
     table->PutNumber("camMode", 0);
     table->PutNumber("ledMode", 0);  //turn the lights on
-    table->PutNumber("pipeline", 0); //Sets limelight’s current pipeline
+    table->PutNumber("pipeline", 1); //Sets limelight’s current pipeline
 
     float tx = table->GetNumber("tx", 0); //Vision processor
 
@@ -81,6 +81,10 @@ void VisionTarget::LimelightOn(float forwardSpeed)
     //calculate
     left_command = /*(-KpDist * disError) + */ (-Kp * steering_adjust) + (-Ki * sumErrorAngle) + (forwardSpeed);
     right_command = /*(KpDist * disError) + */ (-Kp * steering_adjust) + (-Ki * sumErrorAngle) + (-forwardSpeed);
+
+    //PREVENTS THE ROBOT FROM OSCILLATING the the kp
+    if(std::abs(left_command) < 0.1) left_command = 0;
+    if(std::abs(right_command) < 0.1) right_command = 0; 
 
     std::cout << "left_command:" << left_command << " | right_command:" << right_command << std::endl;
 

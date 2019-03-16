@@ -28,6 +28,7 @@ Controller::Controller()
     pneumatic = new Pneumatic();
     visiontarget = new VisionTarget();
     winch = new Winch();
+    drivemode->ArcadeDrive(0, 0, 1);
 }
 
 void Controller::ControllerPeriodic(double deltaTime)
@@ -89,7 +90,7 @@ void Controller::ControllerPeriodic(double deltaTime)
     {
         hatchPanel->HatchOff(); //off
     }
-    
+    /*
     // PNEUMATICS
     if (Operator->GetPOV() == 90) //in
     {
@@ -103,7 +104,7 @@ void Controller::ControllerPeriodic(double deltaTime)
     {
         pneumatic->RunScriptOff();
     }
-/*
+
     // WINCH
     if (Operator->GetRawButton(7))
     {
@@ -117,5 +118,5 @@ void Controller::ControllerPeriodic(double deltaTime)
     {
         winch->WinchOff();
     }*/
-    
+
 }

@@ -12,11 +12,11 @@ IntakeLow::IntakeLow() {
 }
 void IntakeLow::In()
 {
-    intakeLow->Set(ControlMode::PercentOutput, 1);
+    intakeLow->Set(ControlMode::PercentOutput, 1.0);
 }
 void IntakeLow::Out()
 {
-    intakeLow->Set(ControlMode::PercentOutput, -1);
+    intakeLow->Set(ControlMode::PercentOutput, -0.7);
 }
 void IntakeLow::Off()
 {
