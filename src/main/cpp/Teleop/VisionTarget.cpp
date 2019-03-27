@@ -33,7 +33,7 @@ void VisionTarget::LimelightOff()
     //std::cout << "Sonic Value: " << distanceSensor->GetValue() << std::endl;
     // Get limelight table for reading tracking data
     std::shared_ptr<NetworkTable> table = NetworkTable::GetTable("limelight");
-
+table->PutNumber("pipeline", 0); //Sets limelight’s current pipeline
     //turn the lights off
     table->PutNumber("ledMode", 1); //force off
     table->PutNumber("camMode", 1); //Driver Camera (Increases exposure, disables vision processing)
