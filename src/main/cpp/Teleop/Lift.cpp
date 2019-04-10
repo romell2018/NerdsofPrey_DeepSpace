@@ -18,6 +18,8 @@ Lift::Lift()
 
     liftL->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 10);
     liftR->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 10);
+
+    std::cout << "Encoder Position " << LiftPosition() << std::endl;
 }
 
 void Lift::LiftUp()
@@ -46,6 +48,8 @@ void Lift::LiftOff()
     liftR->Set(ControlMode::PercentOutput, 0);
     liftL->Set(ControlMode::PercentOutput, 0);
     //std::cout << "Encoder Position " << LiftPosition() << std::endl;
+
+
 }
 
 float Lift::LiftPosition() { return liftL->GetSelectedSensorPosition(0); }
@@ -126,10 +130,15 @@ void Lift::UpdatePID(float target)
     float output = (kp * error); // + speedStabilization; //+ (ki * sumError) + (kd * deltaError);
     output = (output < -1) ? -1 : (output > 1) ? 1 : output;
 
-    //std::cout << "lift position: " << LiftPosition() << std::endl;
-    //std::cout << "target: " << target << std::endl;
-    //std::cout << "sum error: " << sumError << std::endl;
-    //std::cout << "output: " << output << std::endl << std::endl;
+/*
+if (abs(output) > 0.1) {
+    output = 0;
+    }
+*/
+    std::cout << "lift position: " << LiftPosition() << std::endl;
+    std::cout << "target: " << target << std::endl;
+    std::cout << "sum error: " << sumError << std::endl;
+    std::cout << "output: " << output << std::endl << std::endl;
     UpdatePower(output);
     pastError = error;
 }

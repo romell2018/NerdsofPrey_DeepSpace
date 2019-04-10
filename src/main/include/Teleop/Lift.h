@@ -27,7 +27,7 @@ constexpr int manual = -2,
               ballLow = 1900,
               ballMid = 3570,
               ballHigh = 5800,
-              floor = 150,
+              floor = 300,
               start = 500;
 }
 
@@ -45,7 +45,7 @@ public:
   float sumError;
   float pastError;
   float deltaError;
-  float kp = 0.0045; //0.00055;
+  float kp = 0.0045; //0.00055; //,0045, 007
   float ki = 0;
   float kd = 0;
   //float maxSpeed = 100;

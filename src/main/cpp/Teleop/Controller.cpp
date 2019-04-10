@@ -105,7 +105,7 @@ void Controller::ControllerPeriodic(double deltaTime)
         pneumatic->RunScriptOff();
     }
 
-    // WINCH
+     WINCH*/
     if (Operator->GetRawButton(7))
     {
         winch->WinchUp();
@@ -117,6 +117,6 @@ void Controller::ControllerPeriodic(double deltaTime)
     else
     {
         winch->WinchOff();
-    }*/
+    }
 
 }

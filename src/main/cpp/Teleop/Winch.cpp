@@ -15,13 +15,13 @@ Winch::Winch()
 
 void Winch::WinchUp()
 {
-    winchL->Set(ControlMode::PercentOutput, -1);
-    winchR->Set(ControlMode::PercentOutput, 1);
+    winchL->Set(ControlMode::PercentOutput, -0.5);
+    winchR->Set(ControlMode::PercentOutput, 0.5);
 }
 void Winch::WinchDown()
 {
-    winchL->Set(ControlMode::PercentOutput, 1);
-    winchR->Set(ControlMode::PercentOutput, -1);
+    winchL->Set(ControlMode::PercentOutput, 0.5);
+    winchR->Set(ControlMode::PercentOutput, -0.5);
 }
 void Winch::WinchOff()
 {

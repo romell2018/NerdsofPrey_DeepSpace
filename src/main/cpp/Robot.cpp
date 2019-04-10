@@ -76,8 +76,8 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit()
 {
-  //led->RunScriptBlue();
-  led->RunScriptRed();
+  led->RunScriptBlue();
+  //led->RunScriptRed();
   //controller->lift->targetPosition = Positions::start;
 }
 

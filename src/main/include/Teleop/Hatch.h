@@ -20,7 +20,7 @@ class Hatch {
   frc::Counter *hatchCounter;
 
   int hatchPosition;
-  const double SPEED = 0.5;
+  const double SPEED = 0.7;
 
   void HatchUp();
   void HatchDown();
